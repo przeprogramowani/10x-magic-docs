@@ -1,5 +1,6 @@
 import React from "react";
 import {ResourcesProps} from "./tools.types";
+import {ExternalLink, Link as LinkIcon, BookOpen} from "lucide-react";
 
 export const Resources: React.FC<ResourcesProps> = ({title, links}) => {
   return (
@@ -20,7 +21,7 @@ export const Resources: React.FC<ResourcesProps> = ({title, links}) => {
               rel='noopener noreferrer'
               className='text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg flex items-center'
             >
-              <span className='mr-2'>🔗</span>
+              <LinkIcon className='mr-2' size={18} />
               {link.title}
             </a>
             {link.description && (
