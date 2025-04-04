@@ -24,7 +24,22 @@ export default function Layout({children}: LayoutProps) {
             </h1>
             <nav className='mt-4 sm:mt-0'>
               <ul className='flex space-x-6'>
-                {/* Navigation links removed */}
+                <li>
+                  <Link
+                    to='/'
+                    className='text-gray-300 hover:text-blue-400 transition-colors'
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to='/components'
+                    className='text-gray-300 hover:text-blue-400 transition-colors'
+                  >
+                    Components
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>

@@ -13,33 +13,37 @@ Execute the following:
 
 1) Make sure that subdirectory `src/catalog` exists
 2) Create subdirectory `src/catalog/<TECHNOLOGY>` (kebab-case)
-3) Create new file `src/catalog/<TECHNOLOGY>/knowledge.md` where you will put comprehensive yet approachable documentation explaining key aspects of <TECHNOLOGY>
-3.1) Focus on three key chapters - Why we need it, What it is, How to use it - with technical examples and code snippets
+3) In `src/catalog/<TECHNOLOGY>/{Technology}Page.tsx` create a new React page component that acts as a skeleton for new page.
 
-## Visualizing Technical Knowledge
+4) Now, your task is to create an interactive and engaging single-page documentation for regular developer eager to learn more about <TECHNOLOGY>. The documentation should always cover these three elements:
 
-4) After creating `knowledge.md`, generate 3 complementary diagrams that illuminate different aspects of the technology based on its core characteristics:
+- Highlight the **problem space** the technology addresses
+- Illustrate the **conceptual architecture** of the technology
+- Demonstrate a **practical implementation path**
 
-- First diagram: Highlight the **problem space** the technology addresses
-- Second diagram: Illustrate the **conceptual architecture** of the technology
-- Third diagram: Demonstrate a **practical implementation path**
+You have five tools (React Components) that you can mix and in any way you want:
 
-4.1) In `src/catalog/<TECHNOLOGY>/chart-context.md` create a Mermaid diagram showing the ecosystem and problem context where the technology operates. Focus on pain points it resolves and where it fits in the development landscape.
+- text block
+- code snippet
+- mermaid diagram
+- quiz
+- resources
 
-4.2) In `src/catalog/<TECHNOLOGY>/chart-structure.md` create a Mermaid diagram mapping the internal structure, components, and relationships within the technology. Emphasize how these parts work together.
+The documentation should contain at least:
+- 3 text blocks
+- 2 code snippets
+- 2 quizzes
+- 1 mermaid diagram
+- 1 resources
 
-4.3) In `src/catalog/<TECHNOLOGY>/chart-workflow.md` create a Mermaid diagram outlining a practical workflow with at least 5 concrete steps showcasing a typical implementation scenario.
+Interfaces and documentation of these tools is available below:
+- [tools.types.ts](mdc:src/components/tools/tools.types.ts)
 
-5) Create matching 3D interactive visualizations:
 
-In `src/catalog/<TECHNOLOGY>/{Technology}DiagramContext.tsx`, `{Technology}DiagramStructure.tsx`, and `{Technology}DiagramWorkflow.tsx` create Three.js interactive 3D diagrams that correspond to the Mermaid diagrams but leverage spatial representation to enhance understanding.
-
-Reuse common elements from [BaseThreeJSDiagram.tsx](mdc:src/shared/components/BaseThreeJSDiagram.tsx)
-
-6) In `src/catalog/<TECHNOLOGY>/{Technology}Page.tsx` create a new React page component that integrates all three diagrams - Why, What and How. Use gathered knowledge to create interactive Wikipedia-like page in Dark Mode, inspired by Fluent 2.0 and [Layout.tsx](mdc:src/components/Layout.tsx), incorporating Diagrams and descriptions of each section, with examples in code snippets.
+6) Extend `{Technology}Page.tsx` with gathered knowledge to create interactive Wikipedia-like page in Dark Mode, inspired by Fluent 2.0 and [Layout.tsx](mdc:src/components/Layout.tsx), incorporating all the tools and creative ideas that you can imagine.
 
 General recommendations:
-- When developing code, always follow [threejs.mdc](mdc:.cursor/rules/threejs.mdc) and [react-development.mdc](mdc:.cursor/rules/react-development.mdc)
+- When developing code, always follow and [react-development.mdc](mdc:.cursor/rules/react-development.mdc)
 - Integrate new page with [App.tsx](mdc:src/App.tsx) and embed it as new route.
 - Make sure there's a new tile added on [HomePage.tsx](mdc:src/pages/HomePage.tsx)
 - When building pages and instructions, be specific - as an example, instead of "Read the docs" use suggestions such as "Get familiar with the docs at angular.dev"

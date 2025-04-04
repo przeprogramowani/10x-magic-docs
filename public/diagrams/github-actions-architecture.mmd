@@ -1,0 +1,13 @@
+graph TD
+  A[GitHub Event] -->|Triggers| B[Workflow]
+  B --> C[Job 1]
+  B --> D[Job 2]
+  B --> E[Job N]
+  C --> F[Runner]
+  D --> F
+  E --> F
+  F -->|Executes| G[Steps]
+  G -->|Contains| H[Actions]
+  H --> I[Custom Code]
+  H --> J[Community Actions]
+  H --> K[Official Actions]

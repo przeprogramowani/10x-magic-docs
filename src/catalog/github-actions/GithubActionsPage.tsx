@@ -1,121 +1,40 @@
 import React from "react";
-import {GithubActionsContextDiagram} from "./GithubActionsContextDiagram";
-import {GithubActionsStructureDiagram} from "./GithubActionsStructureDiagram";
-import {GithubActionsWorkflowDiagram} from "./GithubActionsWorkflowDiagram";
+import {TextBlock} from "../../components/tools/TextBlock";
+import {CodeSnippet} from "../../components/tools/CodeSnippet";
+import {MermaidDiagram} from "../../components/tools/MermaidDiagram";
+import {Quiz} from "../../components/tools/Quiz";
+import {Resources} from "../../components/tools/Resources";
+import Layout from "../../components/Layout";
 
-export const GithubActionsPage: React.FC = () => {
+const GithubActionsPage: React.FC = () => {
   return (
-    <div className='min-h-screen bg-gray-900 text-gray-100 p-8'>
-      <div className='max-w-6xl mx-auto'>
-        <h1 className='text-4xl font-bold mb-8 text-blue-400'>
-          GitHub Actions
-        </h1>
+    <Layout>
+      <div className='space-y-8 p-6'>
+        <TextBlock
+          header='Understanding GitHub Actions'
+          text='GitHub Actions is a powerful continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. It enables you to create workflows that can build and test every pull request to your repository, or deploy merged pull requests to production.'
+        />
 
-        {/* Why section */}
-        <section className='mb-16'>
-          <h2 className='text-3xl font-semibold mb-6 text-blue-300'>
-            Why GitHub Actions?
-          </h2>
-          <p className='text-lg mb-6'>
-            GitHub Actions revolutionizes software development workflows by
-            providing seamless automation directly within your GitHub
-            repositories. It addresses common challenges in modern software
-            development and enables teams to focus on building features rather
-            than managing infrastructure.
-          </p>
-          <div className='bg-gray-800 rounded-lg p-6 mb-8'>
-            <GithubActionsContextDiagram />
-          </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <div className='bg-gray-800 rounded-lg p-6'>
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Key Benefits
-              </h3>
-              <ul className='list-disc list-inside space-y-2'>
-                <li>Automated CI/CD pipelines</li>
-                <li>Native GitHub integration</li>
-                <li>Extensive marketplace of actions</li>
-                <li>Flexible and customizable workflows</li>
-                <li>Built-in secret management</li>
-              </ul>
-            </div>
-            <div className='bg-gray-800 rounded-lg p-6'>
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Common Use Cases
-              </h3>
-              <ul className='list-disc list-inside space-y-2'>
-                <li>Continuous Integration</li>
-                <li>Automated Testing</li>
-                <li>Code Quality Checks</li>
-                <li>Automated Deployments</li>
-                <li>Release Management</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        <TextBlock
+          header='Problem Space'
+          text='Before GitHub Actions, developers needed to:
+          • Integrate multiple third-party CI/CD services
+          • Maintain separate configurations across different platforms
+          • Pay for multiple services with different billing models
+          • Deal with limited integration capabilities with GitHub
 
-        {/* What section */}
-        <section className='mb-16'>
-          <h2 className='text-3xl font-semibold mb-6 text-blue-300'>
-            What is GitHub Actions?
-          </h2>
-          <p className='text-lg mb-6'>
-            GitHub Actions is a powerful automation platform that enables you to
-            create custom software development lifecycle workflows directly in
-            your GitHub repository. These workflows are made up of different
-            tasks and steps that can be triggered by various GitHub events.
-          </p>
-          <div className='bg-gray-800 rounded-lg p-6 mb-8'>
-            <GithubActionsStructureDiagram />
-          </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <div className='bg-gray-800 rounded-lg p-6'>
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Core Components
-              </h3>
-              <ul className='list-disc list-inside space-y-2'>
-                <li>Workflows: YAML configuration files</li>
-                <li>Events: Workflow triggers</li>
-                <li>Jobs: Groups of steps</li>
-                <li>Actions: Reusable workflow units</li>
-                <li>Runners: Execution environments</li>
-              </ul>
-            </div>
-            <div className='bg-gray-800 rounded-lg p-6'>
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Features
-              </h3>
-              <ul className='list-disc list-inside space-y-2'>
-                <li>Matrix builds</li>
-                <li>Parallel job execution</li>
-                <li>Environment variables</li>
-                <li>Secrets management</li>
-                <li>Artifact sharing</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+          GitHub Actions solves these challenges by providing a native, integrated solution that works seamlessly with GitHub repositories.'
+        />
 
-        {/* How section */}
-        <section className='mb-16'>
-          <h2 className='text-3xl font-semibold mb-6 text-blue-300'>
-            How to Use GitHub Actions?
-          </h2>
-          <p className='text-lg mb-6'>
-            Implementing GitHub Actions involves creating workflow files in your
-            repository's .github/workflows directory. These workflows define the
-            automation process and can be as simple or complex as needed.
-          </p>
-          <div className='bg-gray-800 rounded-lg p-6 mb-8'>
-            <GithubActionsWorkflowDiagram />
-          </div>
-          <div className='bg-gray-800 rounded-lg p-6 mb-8'>
-            <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-              Basic Workflow Example
-            </h3>
-            <pre className='bg-gray-900 p-4 rounded-lg overflow-x-auto'>
-              <code className='text-sm'>
-                {`name: CI
+        <MermaidDiagram
+          diagramPath='/diagrams/github-actions-architecture.mmd'
+          caption='GitHub Actions Architecture'
+        />
+
+        <CodeSnippet
+          fileName='ci.yml'
+          language='yaml'
+          code={`name: CI
 on:
   push:
     branches: [ main ]
@@ -126,90 +45,70 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: npm install
-      - name: Run tests
-        run: npm test`}
-              </code>
-            </pre>
-          </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <div className='bg-gray-800 rounded-lg p-6'>
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Best Practices
-              </h3>
-              <ul className='list-disc list-inside space-y-2'>
-                <li>Use specific versions for actions</li>
-                <li>Implement proper secret management</li>
-                <li>Cache dependencies</li>
-                <li>Keep workflows focused and modular</li>
-                <li>Add proper error handling</li>
-              </ul>
-            </div>
-            <div className='bg-gray-800 rounded-lg p-6'>
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Advanced Topics
-              </h3>
-              <ul className='list-disc list-inside space-y-2'>
-                <li>Creating custom actions</li>
-                <li>Self-hosted runners</li>
-                <li>Matrix builds</li>
-                <li>Workflow composition</li>
-                <li>Environment protection rules</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - name: Install dependencies
+      run: npm install
+    - name: Run tests
+      run: npm test`}
+        />
 
-        {/* Resources section */}
-        <section>
-          <h2 className='text-3xl font-semibold mb-6 text-blue-300'>
-            Additional Resources
-          </h2>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-            <a
-              href='https://docs.github.com/en/actions'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors'
-            >
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Official Documentation
-              </h3>
-              <p>
-                Comprehensive guide to GitHub Actions features and capabilities
-              </p>
-            </a>
-            <a
-              href='https://github.com/marketplace?type=actions'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors'
-            >
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Actions Marketplace
-              </h3>
-              <p>Discover and share reusable workflow actions</p>
-            </a>
-            <a
-              href='https://github.com/sdras/awesome-actions'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors'
-            >
-              <h3 className='text-xl font-semibold mb-4 text-blue-300'>
-                Awesome Actions
-              </h3>
-              <p>Curated list of awesome actions to use in workflows</p>
-            </a>
-          </div>
-        </section>
+        <TextBlock
+          header='Key Concepts'
+          text='GitHub Actions is built around several key concepts:
+          • Events: Specific activities that trigger a workflow
+          • Workflows: Automated procedures defined in YAML files
+          • Jobs: A set of steps that execute on the same runner
+          • Steps: Individual tasks that run commands or actions
+          • Actions: Reusable units of code that can be shared
+          • Runners: Servers that run your workflows'
+        />
+
+        <Quiz
+          title='GitHub Actions Basics'
+          question={{
+            question:
+              "What file extension is used for GitHub Actions workflow files?",
+            options: [
+              {id: "A", text: ".yml/.yaml"},
+              {id: "B", text: ".json"},
+              {id: "C", text: ".xml"},
+              {id: "D", text: ".config"},
+            ],
+            correctAnswer: "A",
+            explanation:
+              "GitHub Actions workflows are defined in YAML files, which use either .yml or .yaml extensions.",
+          }}
+        />
+
+        <Resources
+          title='Additional Resources'
+          links={[
+            {
+              title: "GitHub Actions Documentation",
+              url: "https://docs.github.com/en/actions",
+              description:
+                "Official documentation covering all aspects of GitHub Actions",
+            },
+            {
+              title: "GitHub Actions Marketplace",
+              url: "https://github.com/marketplace?type=actions",
+              description: "Browse thousands of community-created actions",
+            },
+            {
+              title: "GitHub Actions Starter Workflows",
+              url: "https://github.com/actions/starter-workflows",
+              description:
+                "Collection of template workflows for various languages and tools",
+            },
+          ]}
+        />
       </div>
-    </div>
+    </Layout>
   );
 };
+
+export default GithubActionsPage;
