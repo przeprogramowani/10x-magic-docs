@@ -2,8 +2,6 @@
  * Type definitions for the tool components with usage descriptions
  */
 
-import React from "react";
-
 /**
  * Quiz Component
  *
@@ -46,24 +44,18 @@ export interface QuizProps {
 /**
  * TextBlock Component
  *
- * Displays a header and text/content in a styled container.
- * Text can be a string or React node for rich content.
+ * Displays a header and markdown content in a styled container.
+ * The text prop accepts markdown content which will be rendered as rich text.
  *
  * Usage:
  * <TextBlock
  *   header="Introduction"
- *   text="This is a simple text block component."
- * />
- *
- * // Or with rich content
- * <TextBlock
- *   header="Advanced Usage"
- *   text={<>This is <strong>formatted</strong> content with <a href="#">links</a></>}
+ *   text="This is a **markdown** text with _formatting_."
  * />
  */
 export interface TextBlockProps {
   header: string;
-  text: string | React.ReactNode;
+  text: string; // Markdown content
 }
 
 /**

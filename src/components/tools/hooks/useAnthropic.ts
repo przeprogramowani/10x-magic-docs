@@ -13,6 +13,7 @@ const anthropic = createAnthropic({
 interface UseAnthropicReturn {
   modifyComplexity: (
     text: string,
+    header: string,
     action: "increase" | "decrease",
     currentComplexity: number
   ) => Promise<string>;
@@ -26,6 +27,7 @@ export const useAnthropic = (): UseAnthropicReturn => {
 
   const modifyComplexity = async (
     baseText: string,
+    header: string,
     action: "increase" | "decrease",
     currentComplexity: number
   ): Promise<string> => {
@@ -39,39 +41,38 @@ export const useAnthropic = (): UseAnthropicReturn => {
           ? Math.min(currentComplexity + 1, 10)
           : Math.max(currentComplexity - 1, 0);
 
-      const prompt =
-        action === "increase"
-          ? `Rewrite this text to match complexity level ${newComplexityLevel}/10 (slightly more complex than current): <BASE_TEXT>${baseText}</BASE_TEXT>`
-          : `Rewrite this text to match complexity level ${newComplexityLevel}/10 (slightly simpler than current): <BASE_TEXT>${baseText}</BASE_TEXT>`;
+      const prompt = `<SUBJECT>${header}</SUBJECT> <DESCRIPTION>${baseText}</DESCRIPTION> <TARGET_COMPLEXITY>${newComplexityLevel * 10}%</TARGET_COMPLEXITY>`;
 
       const {text} = await generateText({
         model: anthropic("claude-3-haiku-20240307"),
         messages: [
           {
             role: "system",
-            content: `You are a helpful developer assistant that modifies text complexity on a scale from 0-10:
+            content: `You are a helpful developer assistant that modifies text complexity on a scale from 0 to 100%:
 
             Complexity Scale:
-            - 0: Very simple words like in a children's book that anyone can understand
-            - 1: Article newspaper for casual non-technical readers
-            - 2: Introductory tutorial for junior developers
-            - 3: Technical documentation for beginners with clear explanations
-            - 4: Standard documentation with moderate technical depth
-            - 5: Technical blog post with specific implementation details
-            - 6: Advanced tutorial with in-depth explanations and examples
-            - 7: Detailed technical documentation with architecture discussions
-            - 8: Engineering deep-dive with thorough analysis and edge cases
-            - 9: Academic-level technical content with formal terminology
-            - 10: Expert-level engineering blog with comprehensive technical depth
+            0% - Kindergarten story with extremely simple words and concepts
+            10% - Elementary school level with basic vocabulary and short sentences
+            20% - Middle school level with straightforward explanations
+            30% - High school level with some technical terms introduced
+            40% - Junior developer level with basic programming concepts
+            50% - Regular developer level with standard technical terminology
+            60% - Experienced developer with more advanced concepts
+            70% - Senior developer with detailed technical explanations (add code snippet)
+            80% - Technical lead with specialized domain knowledge (add code snippet)
+            90% - Principal engineer with advanced theoretical concepts (add code snippet)
+            100% - Technical paragraph for senior engineers with highly specialized jargon (add code snippet)
 
-            You'll receive text and a target complexity level (${newComplexityLevel}/10). Rewrite the text to match that complexity while preserving the core meaning and information.
+            You will be given a SUBJECT and a DESCRIPTION of the SUBJECT. The goal is to adjust the DESCRIPTION to match the TARGET_COMPLEXITY.
+
+            Return nothing but the rewritten DESCRIPTION of the SUBJECT based on the target complexity while preserving the core meaning and information.
 
             IMPORTANT:
-            - Make gradual, subtle changes appropriate for a single step on the scale
-            - Do not include any markup or code blocks in your response
-            - Do not add any comments or remarks about the changes you made
-            - Return only the rewritten text
-
+            - Return only updated DESCRIPTION of the SUBJECT based on the target complexity
+            - Make gradual changes appropriate for a single step on the scale
+            - Markdown formatting is allowed and encouraged in the output
+            - Return nothing but therewritten text on certain subject
+            - YOU ARE NOT allowed to add comments like "Here is the description of the subject with a n-% increase in complexity:"
             `,
           },
           {

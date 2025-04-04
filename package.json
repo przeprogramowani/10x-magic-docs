@@ -29,6 +29,7 @@
     "mermaid": "11.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-markdown": "10.1.0",
     "react-router-dom": "7.4.1",
     "tailwind-merge": "3.1.0",
     "tailwindcss": "4.1.2",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@shadcn/ui": "0.0.4",
+    "@tailwindcss/typography": "0.5.16",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",

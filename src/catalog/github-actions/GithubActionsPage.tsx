@@ -16,12 +16,13 @@ const GithubActionsPage: React.FC = () => {
       <TextBlock
         header='Problem Space'
         text='Before GitHub Actions, developers needed to:
-          • Integrate multiple third-party CI/CD services
-          • Maintain separate configurations across different platforms
-          • Pay for multiple services with different billing models
-          • Deal with limited integration capabilities with GitHub
 
-          GitHub Actions solves these challenges by providing a native, integrated solution that works seamlessly with GitHub repositories.'
+* Integrate multiple third-party CI/CD services
+* Maintain separate configurations across different platforms
+* Pay for multiple services with different billing models
+* Deal with limited integration capabilities with GitHub
+
+GitHub Actions solves these challenges by providing a native, integrated solution that works seamlessly with GitHub repositories.'
       />
 
       <MermaidDiagram
@@ -57,12 +58,13 @@ jobs:
       <TextBlock
         header='Key Concepts'
         text='GitHub Actions is built around several key concepts:
-          • Events: Specific activities that trigger a workflow
-          • Workflows: Automated procedures defined in YAML files
-          • Jobs: A set of steps that execute on the same runner
-          • Steps: Individual tasks that run commands or actions
-          • Actions: Reusable units of code that can be shared
-          • Runners: Servers that run your workflows'
+
+* **Events:** Specific activities that trigger a workflow
+* **Workflows:** Automated procedures defined in YAML files
+* **Jobs:** A set of steps that execute on the same runner
+* **Steps:** Individual tasks that run commands or actions
+* **Actions:** Reusable units of code that can be shared
+* **Runners:** Servers that run your workflows'
       />
 
       <Quiz

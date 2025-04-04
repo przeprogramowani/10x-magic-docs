@@ -2,27 +2,50 @@ import React from "react";
 import {TextBlockProps} from "./tools.types";
 import {useAnthropic} from "./hooks/useAnthropic";
 import {ArrowUp, ArrowDown, Dumbbell} from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
   const {modifyComplexity, isLoading, error} = useAnthropic();
-  const [content, setContent] = React.useState(
-    typeof text === "string" ? text : ""
-  );
+  const [content, setContent] = React.useState(text);
   const [complexityLevel, setComplexityLevel] = React.useState<number>(5);
+  const [contentCache, setContentCache] = React.useState<
+    Record<number, string>
+  >({
+    5: text, // Initialize cache with the original text at level 5
+  });
 
   const handleComplexityChange = async (action: "increase" | "decrease") => {
+    // Calculate new complexity level
+    const newComplexityLevel =
+      action === "increase"
+        ? Math.min(complexityLevel + 1, 10)
+        : Math.max(complexityLevel - 1, 0);
+
+    // Don't proceed if we're already at min/max level
+    if (newComplexityLevel === complexityLevel) return;
+
+    // Check if we already have this complexity level in cache
+    if (contentCache[newComplexityLevel]) {
+      setContent(contentCache[newComplexityLevel]);
+      setComplexityLevel(newComplexityLevel);
+      return;
+    }
+
     try {
       const newContent = await modifyComplexity(
         content,
+        header,
         action,
         complexityLevel
       );
+
+      // Update content and cache
       setContent(newContent);
-      setComplexityLevel(
-        action === "increase"
-          ? Math.min(complexityLevel + 1, 10)
-          : Math.max(complexityLevel - 1, 0)
-      );
+      setContentCache((prev) => ({
+        ...prev,
+        [newComplexityLevel]: newContent,
+      }));
+      setComplexityLevel(newComplexityLevel);
     } catch (err) {
       console.error("Failed to modify content:", err);
     }
@@ -38,25 +61,25 @@ export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
         </div>
         <div className='flex gap-2'>
           <span className='flex flex-row items-center gap-1 text-xs text-gray-500'>
-            <Dumbbell size={18} /> {complexityLevel}
+            <Dumbbell size={18} /> {complexityLevel * 10}%
           </span>
           <button
             onClick={() => handleComplexityChange("decrease")}
-            disabled={isLoading}
+            disabled={isLoading || complexityLevel <= 0}
             className='px-2 py-1 text-sm rounded bg-lime-700 text-lime-100 hover:bg-lime-600 disabled:opacity-50 flex items-center gap-1'
           >
             <ArrowDown size={16} /> Simpler
           </button>
           <button
             onClick={() => handleComplexityChange("increase")}
-            disabled={isLoading}
+            disabled={isLoading || complexityLevel >= 10}
             className='px-2 py-1 text-sm rounded bg-indigo-700 text-indigo-100 hover:bg-indigo-600 disabled:opacity-50 flex items-center gap-1'
           >
             <ArrowUp size={16} /> Complex
           </button>
         </div>
       </div>
-      <div className='text-gray-200 leading-relaxed relative'>
+      <div className='text-gray-200 leading-relaxed relative prose prose-invert max-w-none'>
         {isLoading && (
           <div className='absolute inset-0 bg-[#242424]/50 flex items-center justify-center'>
             <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400'></div>
@@ -67,7 +90,7 @@ export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
             Error: {error.message}
           </div>
         )}
-        {typeof text === "string" ? <p>{content}</p> : text}
+        <ReactMarkdown>{content}</ReactMarkdown>
       </div>
     </div>
   );
