@@ -47,19 +47,19 @@ export default function HomePage() {
                     to={subject.path}
                     className='block transition-transform duration-200 hover:scale-105'
                   >
-                    <Card className='h-full border-2 border-gray-200 dark:border-gray-800 shadow-lg dark:shadow-xl bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm'>
+                    <Card className='h-full border-2 border-neutral-200 dark:border-neutral-800 shadow-lg dark:shadow-xl bg-neutral-50/50 dark:bg-neutral-900/50 backdrop-blur-sm'>
                       <CardHeader className='space-y-1'>
                         <CardTitle className='text-xl font-bold'>
-                          <span className='text-gray-900 dark:text-gray-100'>
+                          <span className='text-neutral-900 dark:text-neutral-100'>
                             {subject.name}
                           </span>
                         </CardTitle>
-                        <CardDescription className='text-sm text-gray-600 dark:text-gray-400'>
+                        <CardDescription className='text-sm text-neutral-600 dark:text-neutral-400'>
                           {subject.description}
                         </CardDescription>
                       </CardHeader>
                       <CardFooter>
-                        <Button className='w-full bg-gray-900 hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 text-white transition-all duration-200'>
+                        <Button className='w-full bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-white transition-all duration-200'>
                           Start Learning
                         </Button>
                       </CardFooter>
@@ -68,10 +68,10 @@ export default function HomePage() {
                 </HoverCardTrigger>
                 <HoverCardContent className='w-80'>
                   <div className='space-y-2'>
-                    <h4 className='text-sm font-semibold text-gray-900 dark:text-gray-100'>
+                    <h4 className='text-sm font-semibold text-neutral-900 dark:text-neutral-100'>
                       {subject.name}
                     </h4>
-                    <p className='text-sm text-gray-600 dark:text-gray-400'>
+                    <p className='text-sm text-neutral-600 dark:text-neutral-400'>
                       {subject.description}
                     </p>
                   </div>
@@ -82,13 +82,13 @@ export default function HomePage() {
             return (
               <Card
                 key={`placeholder-${index}`}
-                className='h-full border border-dashed border-gray-300 dark:border-gray-700 bg-gray-100/50 dark:bg-gray-900/50 backdrop-blur-sm opacity-70 transition-all duration-200 hover:opacity-100'
+                className='h-full border border-dashed border-neutral-300 dark:border-neutral-700 bg-neutral-100/50 dark:bg-neutral-900/50 backdrop-blur-sm opacity-70 transition-all duration-200 hover:opacity-100'
               >
                 <CardHeader className='space-y-1'>
-                  <CardTitle className='text-xl font-bold text-gray-500 dark:text-gray-500'>
+                  <CardTitle className='text-xl font-bold text-neutral-500 dark:text-neutral-500'>
                     Coming Soon
                   </CardTitle>
-                  <CardDescription className='text-gray-400 dark:text-gray-400'>
+                  <CardDescription className='text-neutral-400 dark:text-neutral-400'>
                     New learning path will be available soon
                   </CardDescription>
                 </CardHeader>

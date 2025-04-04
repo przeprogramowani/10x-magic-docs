@@ -1,6 +1,7 @@
 import React from "react";
 import {TextBlockProps} from "./tools.types";
 import {useAnthropic} from "./hooks/useAnthropic";
+import {ArrowUp, ArrowDown, Brain} from "lucide-react";
 
 export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
   const {modifyComplexity, isLoading, error} = useAnthropic();
@@ -34,24 +35,24 @@ export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
           <h2 className='text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
             {header}
           </h2>
-          <span className='text-xs text-gray-500'>
-            Complexity: {complexityLevel}/10
+          <span className='flex flex-row items-center gap-1 text-xs text-gray-500'>
+            <Brain size={24} /> {complexityLevel}/10
           </span>
         </div>
         <div className='flex gap-2'>
           <button
             onClick={() => handleComplexityChange("decrease")}
             disabled={isLoading}
-            className='px-2 py-1 text-sm rounded bg-gray-700 text-gray-200 hover:bg-gray-600 disabled:opacity-50'
+            className='px-2 py-1 text-sm rounded bg-lime-700 text-lime-100 hover:bg-lime-600 disabled:opacity-50 flex items-center gap-1'
           >
-            Decrease Complexity
+            <ArrowDown size={16} /> Simpler
           </button>
           <button
             onClick={() => handleComplexityChange("increase")}
             disabled={isLoading}
-            className='px-2 py-1 text-sm rounded bg-gray-700 text-gray-200 hover:bg-gray-600 disabled:opacity-50'
+            className='px-2 py-1 text-sm rounded bg-indigo-700 text-indigo-100 hover:bg-indigo-600 disabled:opacity-50 flex items-center gap-1'
           >
-            Increase Complexity
+            <ArrowUp size={16} /> Complex
           </button>
         </div>
       </div>
