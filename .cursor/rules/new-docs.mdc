@@ -44,6 +44,8 @@ The documentation should contain at least:
 - 1 mermaid diagram
 - 1 resources
 
+For text blocks, use professional technical terminology and industry-standard explanations. Aimed at working developers. Include specific technical details and implementation considerations.
+
 Interfaces and documentation of these tools is available below:
 - [tools.types.ts](mdc:src/components/tools/tools.types.ts)
 

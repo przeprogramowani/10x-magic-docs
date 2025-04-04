@@ -2,6 +2,8 @@ import {useState} from "react";
 import {generateText} from "ai";
 import {createAnthropic} from "@ai-sdk/anthropic";
 
+const MODEL_NAME = "claude-3-5-haiku-20241022";
+
 const anthropic = createAnthropic({
   apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
   baseURL: "/v1",
@@ -38,41 +40,37 @@ export const useAnthropic = (): UseAnthropicReturn => {
       // Update complexity level based on action
       const newComplexityLevel =
         action === "increase"
-          ? Math.min(currentComplexity + 1, 10)
+          ? Math.min(currentComplexity + 1, 4)
           : Math.max(currentComplexity - 1, 0);
 
-      const prompt = `<SUBJECT>${header}</SUBJECT> <DESCRIPTION>${baseText}</DESCRIPTION> <TARGET_COMPLEXITY>${newComplexityLevel * 10}%</TARGET_COMPLEXITY>`;
+      const prompt = `<SUBJECT>${header}</SUBJECT> <DESCRIPTION>${baseText}</DESCRIPTION> <TARGET_COMPLEXITY>${newComplexityLevel}</TARGET_COMPLEXITY>`;
 
       const {text} = await generateText({
-        model: anthropic("claude-3-haiku-20240307"),
+        model: anthropic(MODEL_NAME),
         messages: [
           {
             role: "system",
-            content: `You are a helpful developer assistant that modifies text complexity on a scale from 0 to 100%:
+            content: `You are a helpful developer assistant that modifies text complexity on a scale from 0 to 4, representing distinct levels of technical understanding:
 
             Complexity Scale:
-            0% - Kindergarten story with extremely simple words and concepts
-            10% - Elementary school level with basic vocabulary and short sentences
-            20% - Middle school level with straightforward explanations
-            30% - High school level with some technical terms introduced
-            40% - Junior developer level with basic programming concepts
-            50% - Regular developer level with standard technical terminology
-            60% - Experienced developer with more advanced concepts
-            70% - Senior developer with detailed technical explanations
-            80% - Technical lead with specialized domain knowledge
-            90% - Principal engineer with advanced theoretical concepts
-            100% - Technical paragraph for senior engineers with highly specialized jargon
+            0 - Beginner: Simple explanations using everyday language. Avoid technical terms. Perfect for complete beginners with no technical background. Use analogies and real-world examples.
 
-            You will be given a SUBJECT and a DESCRIPTION of the SUBJECT. The goal is to adjust the DESCRIPTION to match the TARGET_COMPLEXITY.
+            1 - Intermediate: Basic technical concepts introduced. Use entry-level programming terms. Suitable for junior developers or tech-savvy individuals. Include simple code references where relevant.
 
-            Return nothing but the rewritten DESCRIPTION of the SUBJECT based on the target complexity while preserving the core meaning and information.
+            2 - Professional: Standard technical terminology and industry-standard explanations. Aimed at working developers. Include specific technical details and implementation considerations.
+
+            3 - Advanced: Deep technical insights and architectural considerations. For senior developers and tech leads. Cover advanced patterns, trade-offs, and system design aspects.
+
+            4 - Expert: Highly technical and specialized knowledge. For principal engineers and architects. Include complex technical concepts, theoretical foundations, and cutting-edge approaches.
+
+            You will be given a SUBJECT and a DESCRIPTION of the SUBJECT. The goal is to adjust the DESCRIPTION to match the TARGET_COMPLEXITY level (0-4).
 
             IMPORTANT:
-            - Return only updated DESCRIPTION of the SUBJECT based on the target complexity
-            - Make gradual changes appropriate for a single step on the scale
-            - Markdown formatting is allowed and encouraged in the output
-            - Return nothing but therewritten text on certain subject
-            - YOU ARE NOT allowed to add comments like "Here is the description of the subject with a n-% increase in complexity:"
+            - Return only the rewritten DESCRIPTION
+            - Each level should have a clear and distinct difference in complexity
+            - Maintain technical accuracy while adjusting the complexity
+            - Use appropriate markdown formatting
+            - Focus on making substantial changes in terminology and concept depth between levels
             `,
           },
           {

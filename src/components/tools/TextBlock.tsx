@@ -4,21 +4,29 @@ import {useAnthropic} from "./hooks/useAnthropic";
 import {ArrowUp, ArrowDown, Dumbbell} from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
+const complexityLabels = [
+  "Beginner",
+  "Intermediate",
+  "Professional",
+  "Advanced",
+  "Expert",
+];
+
 export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
   const {modifyComplexity, isLoading, error} = useAnthropic();
   const [content, setContent] = React.useState(text);
-  const [complexityLevel, setComplexityLevel] = React.useState<number>(5);
+  const [complexityLevel, setComplexityLevel] = React.useState<number>(2); // Start at Professional level
   const [contentCache, setContentCache] = React.useState<
     Record<number, string>
   >({
-    5: text, // Initialize cache with the original text at level 5
+    2: text, // Initialize cache with the original text at level 2 (Professional)
   });
 
   const handleComplexityChange = async (action: "increase" | "decrease") => {
     // Calculate new complexity level
     const newComplexityLevel =
       action === "increase"
-        ? Math.min(complexityLevel + 1, 10)
+        ? Math.min(complexityLevel + 1, 4)
         : Math.max(complexityLevel - 1, 0);
 
     // Don't proceed if we're already at min/max level
@@ -59,9 +67,10 @@ export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
             {header}
           </h2>
         </div>
-        <div className='flex gap-2'>
-          <span className='flex flex-row items-center gap-1 text-xs text-gray-500'>
-            <Dumbbell size={18} /> {complexityLevel * 10}%
+        <div className='flex gap-2 items-center'>
+          <span className='flex flex-row items-center gap-2 text-sm text-gray-400'>
+            <Dumbbell size={16} />
+            <span>{complexityLabels[complexityLevel]}</span>
           </span>
           <button
             onClick={() => handleComplexityChange("decrease")}
@@ -72,7 +81,7 @@ export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
           </button>
           <button
             onClick={() => handleComplexityChange("increase")}
-            disabled={isLoading || complexityLevel >= 10}
+            disabled={isLoading || complexityLevel >= 4}
             className='px-2 py-1 text-sm rounded bg-indigo-700 text-indigo-100 hover:bg-indigo-600 disabled:opacity-50 flex items-center gap-1'
           >
             <ArrowUp size={16} />
