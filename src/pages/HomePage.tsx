@@ -86,10 +86,10 @@ export default function HomePage() {
               >
                 <CardHeader className='space-y-1'>
                   <CardTitle className='text-xl font-bold text-neutral-500 dark:text-neutral-500'>
-                    Coming Soon
+                    -
                   </CardTitle>
                   <CardDescription className='text-neutral-400 dark:text-neutral-400'>
-                    New learning path will be available soon
+                    Use Agentic AI to create new learning paths
                   </CardDescription>
                 </CardHeader>
                 <CardFooter>
