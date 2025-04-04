@@ -1,17 +1,27 @@
 import React from "react";
 import {TextBlockProps} from "./tools.types";
-import {useOpenRouter} from "./hooks/useOpenRouter";
+import {useAnthropic} from "./hooks/useAnthropic";
 
 export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
-  const {modifyComplexity, isLoading, error} = useOpenRouter();
+  const {modifyComplexity, isLoading, error} = useAnthropic();
   const [content, setContent] = React.useState(
     typeof text === "string" ? text : ""
   );
+  const [complexityLevel, setComplexityLevel] = React.useState<number>(5);
 
   const handleComplexityChange = async (action: "increase" | "decrease") => {
     try {
-      const newContent = await modifyComplexity(content, action);
+      const newContent = await modifyComplexity(
+        content,
+        action,
+        complexityLevel
+      );
       setContent(newContent);
+      setComplexityLevel(
+        action === "increase"
+          ? Math.min(complexityLevel + 1, 10)
+          : Math.max(complexityLevel - 1, 0)
+      );
     } catch (err) {
       console.error("Failed to modify content:", err);
     }
@@ -20,23 +30,28 @@ export const TextBlock: React.FC<TextBlockProps> = ({header, text}) => {
   return (
     <div className='bg-[#242424] rounded-lg border border-gray-800 p-6 mb-6'>
       <div className='flex justify-between items-center mb-3'>
-        <h2 className='text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
-          {header}
-        </h2>
+        <div className='flex items-center gap-3'>
+          <h2 className='text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>
+            {header}
+          </h2>
+          <span className='text-xs text-gray-500'>
+            Complexity: {complexityLevel}/10
+          </span>
+        </div>
         <div className='flex gap-2'>
           <button
             onClick={() => handleComplexityChange("decrease")}
             disabled={isLoading}
             className='px-2 py-1 text-sm rounded bg-gray-700 text-gray-200 hover:bg-gray-600 disabled:opacity-50'
           >
-            Simplify
+            Decrease Complexity
           </button>
           <button
             onClick={() => handleComplexityChange("increase")}
             disabled={isLoading}
             className='px-2 py-1 text-sm rounded bg-gray-700 text-gray-200 hover:bg-gray-600 disabled:opacity-50'
           >
-            Enhance
+            Increase Complexity
           </button>
         </div>
       </div>

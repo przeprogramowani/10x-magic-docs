@@ -13,7 +13,7 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({
   useEffect(() => {
     // Import highlight.js dynamically
     import("highlight.js").then((hljs) => {
-      import(`highlight.js/lib/languages/${language}`)
+      import(/* @vite-ignore */ `highlight.js/lib/languages/${language}`)
         .then((languageModule) => {
           hljs.default.registerLanguage(language, languageModule.default);
           const highlighted = hljs.default.highlight(code, {language}).value;

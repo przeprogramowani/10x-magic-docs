@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "1.2.6",
     "@radix-ui/react-hover-card": "1.1.6",
     "@radix-ui/react-navigation-menu": "1.2.5",
     "@radix-ui/react-slot": "1.1.2",
@@ -17,7 +18,9 @@
     "@react-three/fiber": "9.1.1",
     "@react-three/postprocessing": "3.0.4",
     "@tailwindcss/vite": "4.1.2",
+    "@types/node": "22.14.0",
     "@types/three": "0.175.0",
+    "ai": "4.3.0",
     "axios": "1.8.4",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",

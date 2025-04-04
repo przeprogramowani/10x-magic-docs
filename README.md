@@ -21,4 +21,5 @@ Create new docs page for Github Actions based on @new-docs.mdc
 - TailwindCSS
 - React
 - TypeScript
-- Three.js
+- Shadcn UI
+- OpenRouter

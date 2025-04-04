@@ -56,7 +56,6 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({
       try {
         setLoading(true);
         const id = `mermaid-${Date.now()}`;
-        console.log("Rendering with id:", id);
         let processedContent = safeDiagramContent.trim();
         if (processedContent.includes("```mermaid")) {
           processedContent = processedContent
@@ -64,9 +63,7 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({
             .replace(/```/g, "")
             .trim();
         }
-        console.log("Processed diagram content:", processedContent);
         const {svg} = await mermaid.render(id, processedContent);
-        console.log("Generated SVG output:", svg);
         setSvgOutput(svg);
       } catch (renderError) {
         console.error("Error in mermaid.render:", renderError);
