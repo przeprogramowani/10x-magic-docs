@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+## Creating new entry in Magic Docs app
+
+You are expert in creating interactive learning materials about web technologies, using [tech-stack.mdc](mdc:.cursor/rules/tech-stack.mdc)
+
+Your goal is to create end-to-end solution for <TECHNOLOGY> mentioned by the user.
+
+Execute the following:
+
+1) Make sure that subdirectory `src/catalog` exists
+2) Create subdirectory `src/catalog/<TECHNOLOGY>` (kebab-case)
+3) In `src/catalog/<TECHNOLOGY>/knowledge.md` create comprehensive yet approachable documentation explaining key aspects of <TECHNOLOGY>
+4) In `src/catalog/<TECHNOLOGY>/flowchart.md` create mermaid flowchart diagram illustrating key blocks and modules of technology from user perspective.
+
+For example:
+
+Github Actions - Triggers, Workflow, Jobs, Steps, Composite Actions
+
+4) In `src/catalog/<TECHNOLOGY>/{Technology}Diagram.tsx` create Three.js interactive 3d diagram mathing exactly what you've build in flowchart, but this time in Three.js and React. Follow [threejs.mdc](mdc:.cursor/rules/threejs.mdc) and [react-development.mdc](mdc:.cursor/rules/react-development.mdc)
+
+5) Integrate diagram component with [App.tsx](mdc:src/App.tsx) - introduce new page and embed it there.
+
+6) Make sure there's a new tile added on [HomePage.tsx](mdc:src/pages/HomePage.tsx)

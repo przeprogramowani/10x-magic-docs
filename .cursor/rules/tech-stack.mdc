@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## Tech Stack
+
+- Vite
+- TailwindCSS
+- React
+- React Router v7
+- TypeScript
+- Three.js
