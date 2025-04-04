@@ -5,9 +5,9 @@ alwaysApply: true
 ---
 ## Tech Stack
 
-- React
-- Three.js
+- React 19
 - Tailwind
 - Vite
+- shadcn/ui
 
 Always use libraries and frameworks available in [package.json](mdc:package.json)

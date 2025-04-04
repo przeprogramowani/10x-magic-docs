@@ -15,6 +15,14 @@ Execute the following:
 2) Create subdirectory `src/catalog/<TECHNOLOGY>` (kebab-case)
 3) In `src/catalog/<TECHNOLOGY>/{Technology}Page.tsx` create a new React page component that acts as a skeleton for new page.
 
+Use h1 header as a starting point:
+
+```
+<h1 className='text-4xl font-bold mb-8 text-white'>
+  <TECHNOLOGY>: One sentence description
+</h1>
+```
+
 4) Now, your task is to create an interactive and engaging single-page documentation for regular developer eager to learn more about <TECHNOLOGY>. The documentation should always cover these three elements:
 
 - Highlight the **problem space** the technology addresses
@@ -23,11 +31,11 @@ Execute the following:
 
 You have five tools (React Components) that you can mix and in any way you want:
 
-- text block
-- code snippet
-- mermaid diagram
-- quiz
-- resources
+- Text block
+- Code snippet
+- Mermaid diagram
+- Quiz
+- Resources
 
 The documentation should contain at least:
 - 3 text blocks
@@ -44,6 +52,6 @@ Interfaces and documentation of these tools is available below:
 
 General recommendations:
 - When developing code, always follow and [react-development.mdc](mdc:.cursor/rules/react-development.mdc)
-- Integrate new page with [App.tsx](mdc:src/App.tsx) and embed it as new route.
+- Integrate new page with [App.tsx](mdc:src/App.tsx) and embed it as new route, always wrapping it with `<Layout>`
 - Make sure there's a new tile added on [HomePage.tsx](mdc:src/pages/HomePage.tsx)
 - When building pages and instructions, be specific - as an example, instead of "Read the docs" use suggestions such as "Get familiar with the docs at angular.dev"

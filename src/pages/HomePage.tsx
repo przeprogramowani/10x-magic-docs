@@ -1,8 +1,32 @@
 import {Link} from "react-router-dom";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import {Button} from "../components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "../components/ui/hover-card";
 
 // Define available subjects
 const availableSubjects = [
-  {id: "github-actions", name: "GitHub Actions", path: "/github-actions"},
+  {
+    id: "github-actions",
+    name: "GitHub Actions",
+    path: "/github-actions",
+    description: "Learn GitHub Actions automation",
+  },
+  {
+    id: "docker",
+    name: "Docker",
+    path: "/docker",
+    description: "Master containerization with Docker",
+  },
 ];
 
 // Total number of tiles to display
@@ -10,33 +34,66 @@ const TOTAL_TILES = 25;
 
 export default function HomePage() {
   return (
-    <div className='container mx-auto p-8'>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'>
+    <div className='container mx-auto py-8'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
         {Array.from({length: TOTAL_TILES}, (_, index) => {
           const subject = availableSubjects[index];
 
           if (subject) {
             return (
-              <Link
-                key={subject.id}
-                to={subject.path}
-                className='bg-gradient-to-br from-[#2a2a2a] to-[#242424] p-4 rounded-lg shadow-lg hover:shadow-xl transition-all border border-blue-700 flex items-center justify-center h-32 hover:bg-gradient-to-br hover:from-[#323232] hover:to-[#282828] transform hover:scale-105'
-              >
-                <span className='text-center font-medium text-blue-300 hover:text-blue-200 transition-colors text-lg'>
-                  {subject.name}
-                </span>
-              </Link>
+              <HoverCard key={subject.id}>
+                <HoverCardTrigger asChild>
+                  <Link
+                    to={subject.path}
+                    className='block transition-transform duration-200 hover:scale-105'
+                  >
+                    <Card className='h-full border-2 shadow-lg'>
+                      <CardHeader className='space-y-1'>
+                        <CardTitle className='text-xl font-bold bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent'>
+                          {subject.name}
+                        </CardTitle>
+                        <CardDescription className='text-sm text-muted-foreground'>
+                          {subject.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardFooter>
+                        <Button className='w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800'>
+                          Start Learning
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  </Link>
+                </HoverCardTrigger>
+                <HoverCardContent className='w-80'>
+                  <div className='space-y-2'>
+                    <h4 className='text-sm font-semibold'>{subject.name}</h4>
+                    <p className='text-sm text-muted-foreground'>
+                      {subject.description}
+                    </p>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             );
           } else {
             return (
-              <div
+              <Card
                 key={`placeholder-${index}`}
-                className='bg-[#1e1e1e] p-4 rounded-lg border border-gray-800 border-dashed flex items-center justify-center h-32'
+                className='h-full border border-dashed opacity-70 transition-opacity duration-200 hover:opacity-100'
               >
-                <span className='text-center font-medium text-gray-500'>
-                  Subject {index + 1}
-                </span>
-              </div>
+                <CardHeader className='space-y-1'>
+                  <CardTitle className='text-xl font-bold text-muted-foreground'>
+                    Coming Soon
+                  </CardTitle>
+                  <CardDescription className='text-sm text-muted-foreground'>
+                    New learning path will be available soon
+                  </CardDescription>
+                </CardHeader>
+                <CardFooter>
+                  <Button disabled className='w-full' variant='secondary'>
+                    Subject {index + 1}
+                  </Button>
+                </CardFooter>
+              </Card>
             );
           }
         })}

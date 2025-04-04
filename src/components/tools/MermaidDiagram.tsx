@@ -18,6 +18,8 @@ mermaid.initialize({
   },
 });
 
+type ViewMode = "preview" | "code";
+
 export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({
   diagramPath,
   caption,
@@ -26,6 +28,7 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({
   const [loading, setLoading] = useState(true);
   const [diagramContent, setDiagramContent] = useState<string | null>(null);
   const [svgOutput, setSvgOutput] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>("preview");
 
   // Fetch diagram content if a path is provided
   useEffect(() => {
@@ -79,6 +82,31 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({
 
   return (
     <div className='bg-[#242424] rounded-lg border border-gray-800 p-6 mb-6'>
+      <div className='flex justify-center mb-4'>
+        <div className='inline-flex rounded-lg border border-gray-700 p-1 bg-gray-800/50'>
+          <button
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              viewMode === "preview"
+                ? "bg-blue-500 text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={() => setViewMode("preview")}
+          >
+            Preview
+          </button>
+          <button
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              viewMode === "code"
+                ? "bg-blue-500 text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={() => setViewMode("code")}
+          >
+            Code
+          </button>
+        </div>
+      </div>
+
       {loading && (
         <div className='flex justify-center items-center h-40'>
           <div className='text-blue-400'>Loading diagram...</div>
@@ -89,11 +117,20 @@ export const MermaidDiagram: React.FC<MermaidDiagramProps> = ({
           {error}
         </div>
       )}
-      {!loading && !error && svgOutput && (
-        <div
-          className='flex justify-center py-4 overflow-x-auto'
-          dangerouslySetInnerHTML={{__html: svgOutput}}
-        />
+      {!loading && !error && (
+        <>
+          {viewMode === "preview" && svgOutput && (
+            <div
+              className='flex justify-center py-4 overflow-x-auto'
+              dangerouslySetInnerHTML={{__html: svgOutput}}
+            />
+          )}
+          {viewMode === "code" && diagramContent && (
+            <pre className='bg-gray-900 rounded-lg p-4 overflow-x-auto'>
+              <code className='text-gray-300 text-sm'>{diagramContent}</code>
+            </pre>
+          )}
+        </>
       )}
       {caption && (
         <div className='text-center text-gray-400 text-sm mt-2'>{caption}</div>

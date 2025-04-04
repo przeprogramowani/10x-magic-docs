@@ -1,0 +1,25 @@
+graph TB
+    subgraph "Docker Host"
+        D[Docker Daemon] --> |manages| C1[Container 1]
+        D --> |manages| C2[Container 2]
+        D --> |manages| C3[Container 3]
+
+        subgraph "Docker Engine"
+            D --> |uses| IR[Image Registry]
+            D --> |uses| CN[Container Network]
+            D --> |uses| VS[Volume Storage]
+        end
+    end
+
+    CLI[Docker CLI] --> |commands| D
+    IR --> |pulls from| DH[Docker Hub]
+
+    style D fill:#2496ED,stroke:#fff,stroke-width:2px,color:#fff
+    style CLI fill:#2496ED,stroke:#fff,stroke-width:2px,color:#fff
+    style DH fill:#2496ED,stroke:#fff,stroke-width:2px,color:#fff
+    style C1 fill:#13ADC7,stroke:#fff,stroke-width:2px,color:#fff
+    style C2 fill:#13ADC7,stroke:#fff,stroke-width:2px,color:#fff
+    style C3 fill:#13ADC7,stroke:#fff,stroke-width:2px,color:#fff
+    style IR fill:#0DB7ED,stroke:#fff,stroke-width:2px,color:#fff
+    style CN fill:#0DB7ED,stroke:#fff,stroke-width:2px,color:#fff
+    style VS fill:#0DB7ED,stroke:#fff,stroke-width:2px,color:#fff
