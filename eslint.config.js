@@ -39,7 +39,11 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules, // Apply React Hooks rules
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+      // prettier-ignore
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
       "react/react-in-jsx-scope": "off", // Not needed with React 17+ and Vite
       "react/prop-types": "off", // Disable prop-types rule if using TypeScript
     },
