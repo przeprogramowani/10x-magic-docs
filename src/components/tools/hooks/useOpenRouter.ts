@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 
 type ComplexityAction = "increase" | "decrease";
 
@@ -21,10 +21,7 @@ export const useOpenRouter = ({
   const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
   const API_URL = "https://openrouter.ai/api/v1/chat/completions";
 
-  const modifyComplexity = async (
-    text: string,
-    action: ComplexityAction
-  ): Promise<string> => {
+  const modifyComplexity = async (text: string, action: ComplexityAction): Promise<string> => {
     if (!OPENROUTER_API_KEY) {
       throw new Error("OpenRouter API key is not configured");
     }

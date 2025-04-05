@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import {QuizProps} from "./tools.types";
+import React, { useState } from "react";
+import { QuizProps } from "./tools.types";
 
-export const Quiz: React.FC<QuizProps> = ({title, question}) => {
+export const Quiz: React.FC<QuizProps> = ({ title, question }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
 
@@ -23,15 +23,13 @@ export const Quiz: React.FC<QuizProps> = ({title, question}) => {
   const isCorrect = selectedAnswer === question.correctAnswer;
 
   return (
-    <div className='bg-[#242424] rounded-lg border border-gray-800 p-6 mb-6'>
-      {title && (
-        <h3 className='text-lg font-semibold mb-3 text-blue-400'>{title}</h3>
-      )}
+    <div className="bg-[#242424] rounded-lg border border-gray-800 p-6 mb-6">
+      {title && <h3 className="text-lg font-semibold mb-3 text-blue-400">{title}</h3>}
 
-      <div className='mb-4'>
-        <p className='text-gray-100 font-medium mb-4'>{question.question}</p>
+      <div className="mb-4">
+        <p className="text-gray-100 font-medium mb-4">{question.question}</p>
 
-        <div className='space-y-2'>
+        <div className="space-y-2">
           {question.options.map((option) => (
             <button
               key={option.id}
@@ -47,7 +45,7 @@ export const Quiz: React.FC<QuizProps> = ({title, question}) => {
                   : "bg-[#1e1e1e] border-gray-700 hover:border-gray-500"
               }`}
             >
-              <span className='font-bold mr-2'>{option.id}.</span> {option.text}
+              <span className="font-bold mr-2">{option.id}.</span> {option.text}
             </button>
           ))}
         </div>
@@ -74,19 +72,15 @@ export const Quiz: React.FC<QuizProps> = ({title, question}) => {
                 : "bg-red-900/20 border border-red-800"
             }`}
           >
-            <p
-              className={`font-medium ${isCorrect ? "text-green-400" : "text-red-400"}`}
-            >
+            <p className={`font-medium ${isCorrect ? "text-green-400" : "text-red-400"}`}>
               {isCorrect ? "✓ Correct!" : "✗ Incorrect!"}
             </p>
-            {question.explanation && (
-              <p className='text-gray-300 mt-2'>{question.explanation}</p>
-            )}
+            {question.explanation && <p className="text-gray-300 mt-2">{question.explanation}</p>}
           </div>
 
           <button
             onClick={handleReset}
-            className='mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors'
+            className="mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
           >
             Try Again
           </button>

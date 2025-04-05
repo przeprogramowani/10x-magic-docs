@@ -1,6 +1,6 @@
-import {useState} from "react";
-import {generateText} from "ai";
-import {createAnthropic} from "@ai-sdk/anthropic";
+import { useState } from "react";
+import { generateText } from "ai";
+import { createAnthropic } from "@ai-sdk/anthropic";
 
 const MODEL_NAME = "claude-3-5-haiku-20241022";
 
@@ -17,7 +17,7 @@ interface UseAnthropicReturn {
     text: string,
     header: string,
     action: "increase" | "decrease",
-    currentComplexity: number
+    currentComplexity: number,
   ) => Promise<string>;
   isLoading: boolean;
   error: Error | null;
@@ -31,7 +31,7 @@ export const useAnthropic = (): UseAnthropicReturn => {
     baseText: string,
     header: string,
     action: "increase" | "decrease",
-    currentComplexity: number
+    currentComplexity: number,
   ): Promise<string> => {
     setIsLoading(true);
     setError(null);
@@ -45,7 +45,7 @@ export const useAnthropic = (): UseAnthropicReturn => {
 
       const prompt = `<SUBJECT>${header}</SUBJECT> <DESCRIPTION>${baseText}</DESCRIPTION> <TARGET_COMPLEXITY>${newComplexityLevel}</TARGET_COMPLEXITY>`;
 
-      const {text} = await generateText({
+      const { text } = await generateText({
         model: anthropic(MODEL_NAME),
         messages: [
           {
@@ -82,10 +82,7 @@ export const useAnthropic = (): UseAnthropicReturn => {
 
       return text;
     } catch (err) {
-      const error =
-        err instanceof Error
-          ? err
-          : new Error("Failed to modify text complexity");
+      const error = err instanceof Error ? err : new Error("Failed to modify text complexity");
       setError(error);
       throw error;
     } finally {

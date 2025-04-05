@@ -1,4 +1,4 @@
-import {create} from "zustand";
+import { create } from "zustand";
 
 interface ApiKeyState {
   apiKey: string;
@@ -7,5 +7,5 @@ interface ApiKeyState {
 
 export const useApiKeyStore = create<ApiKeyState>()((set) => ({
   apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY || "",
-  setApiKey: (key: string) => set({apiKey: key}),
+  setApiKey: (key: string) => set({ apiKey: key }),
 }));
