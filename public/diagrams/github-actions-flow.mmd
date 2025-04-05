@@ -1,0 +1,33 @@
+graph TD
+    A[Event] -->|Triggers| B[Workflow]
+    B --> C[Job 1]
+    B --> D[Job 2]
+    B --> E[Job 3]
+    C --> F[Runner 1]
+    D --> G[Runner 2]
+    E --> H[Runner 3]
+    F --> I[Steps]
+    G --> J[Steps]
+    H --> K[Steps]
+    I --> L[Checkout]
+    I --> M[Setup]
+    I --> N[Build]
+    I --> O[Test]
+    I --> P[Deploy]
+
+    style A fill:#2da44e,stroke:#2da44e,color:white
+    style B fill:#1f6feb,stroke:#1f6feb,color:white
+    style C fill:#2ea043,stroke:#2ea043,color:white
+    style D fill:#2ea043,stroke:#2ea043,color:white
+    style E fill:#2ea043,stroke:#2ea043,color:white
+    style F fill:#1f6feb,stroke:#1f6feb,color:white
+    style G fill:#1f6feb,stroke:#1f6feb,color:white
+    style H fill:#1f6feb,stroke:#1f6feb,color:white
+    style I fill:#2ea043,stroke:#2ea043,color:white
+    style J fill:#2ea043,stroke:#2ea043,color:white
+    style K fill:#2ea043,stroke:#2ea043,color:white
+    style L fill:#1f6feb,stroke:#1f6feb,color:white
+    style M fill:#1f6feb,stroke:#1f6feb,color:white
+    style N fill:#1f6feb,stroke:#1f6feb,color:white
+    style O fill:#1f6feb,stroke:#1f6feb,color:white
+    style P fill:#1f6feb,stroke:#1f6feb,color:white

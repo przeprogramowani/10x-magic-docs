@@ -21,7 +21,15 @@ interface Subject {
 }
 
 // Introduce a new Subject to present it on the home page grid
-const availableSubjects: Subject[] = [];
+const availableSubjects: Subject[] = [
+  {
+    id: "github-actions",
+    name: "Pierwsze kroki GitHub Actions",
+    path: "/docs/github-actions",
+    description:
+      "Poznaj podstawy automatyzacji przepływu pracy w GitHub z wykorzystaniem GitHub Actions",
+  },
+];
 
 // Total number of tiles to display
 const TOTAL_TILES = 25;
