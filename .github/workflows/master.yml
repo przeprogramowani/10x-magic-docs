@@ -1,0 +1,12 @@
+name: Test & Build Master
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+  build:
+    runs-on: ubuntu-latest

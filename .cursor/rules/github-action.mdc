@@ -1,0 +1,12 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+## Github Action version verification
+
+Check what is the most up-to-date version of certain Github Actions with the following command:
+
+```bash
+curl -s https://api.github.com/repos/{owner}/{repo}/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([0-9]+).*/\1/'
+```
