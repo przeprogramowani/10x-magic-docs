@@ -4,10 +4,6 @@
 
 Create interactive bits of documentation by collaborating with Generative AI Models.
 
-## Prequisites
-
-- Anthropic API Key (see `.env.example`)
-
 ## How to use
 
 1. Clone the repository
@@ -29,3 +25,7 @@ Create new docs page for <TECHNOLOGY> based on @new-docs.mdc
 - TypeScript
 - Shadcn UI
 - OpenRouter
+
+## Prequisites for unlocking in-app AI Features
+
+- Anthropic API Key (see `.env.example`)
